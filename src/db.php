@@ -15,13 +15,31 @@ function getDbConnection(): PDO
         }
     }
 
-    $host = getenv('DB_HOST') ?: 'localhost';
-    $port = getenv('DB_PORT') ?: '3306';
-    $name = getenv('DB_NAME') ?: 'myholiday';
-    $user = getenv('DB_USER') ?: 'root';
-    $pass = getenv('DB_PASSWORD') ?: '';
+    $url = getenv('DATABASE_URL');
+    if (!$url) {
+        throw new RuntimeException('DATABASE_URL is not set');
+    }
 
-    $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
+    $parts = parse_url($url);
+    if ($parts === false || empty($parts['host']) || empty($parts['user'])) {
+        throw new RuntimeException('DATABASE_URL is malformed');
+    }
+
+    $host = $parts['host'];
+    $port = $parts['port'] ?? 5432;
+    $name = isset($parts['path']) ? ltrim($parts['path'], '/') : '';
+    $user = urldecode($parts['user']);
+    $pass = isset($parts['pass']) ? urldecode($parts['pass']) : '';
+
+    $sslmode = 'require';
+    if (!empty($parts['query'])) {
+        parse_str($parts['query'], $query);
+        if (!empty($query['sslmode'])) {
+            $sslmode = $query['sslmode'];
+        }
+    }
+
+    $dsn = "pgsql:host={$host};port={$port};dbname={$name};sslmode={$sslmode}";
 
     return new PDO($dsn, $user, $pass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

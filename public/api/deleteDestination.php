@@ -12,7 +12,7 @@ if ($activity === '') {
 }
 
 $pdo = getDbConnection();
-$stmt = $pdo->prepare('DELETE FROM addedDestination WHERE addedActivity = :activity');
+$stmt = $pdo->prepare('DELETE FROM added_destination WHERE added_activity = :activity');
 $stmt->execute([':activity' => $activity]);
 
 echo json_encode(['ok' => true]);

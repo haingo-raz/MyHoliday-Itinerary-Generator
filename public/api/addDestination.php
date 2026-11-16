@@ -16,8 +16,9 @@ if ($location === '' || $activity === '') {
 
 $pdo = getDbConnection();
 $stmt = $pdo->prepare(
-    'INSERT INTO addedDestination (addedLocation, addedActivity, addedDuration, addedPrice)
-     VALUES (:location, :activity, :duration, :price)'
+    'INSERT INTO added_destination (added_location, added_activity, added_duration, added_price)
+     VALUES (:location, :activity, :duration, :price)
+     ON CONFLICT (added_activity) DO NOTHING'
 );
 $stmt->execute([
     ':location' => $location,

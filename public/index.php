@@ -8,7 +8,7 @@ $searchResults = [];
 if ($userInput !== '') {
     $stmt = $pdo->prepare(
         'SELECT * FROM destination
-         WHERE country LIKE :q OR location LIKE :q OR activity LIKE :q
+         WHERE country ILIKE :q OR location ILIKE :q OR activity ILIKE :q
          ORDER BY price'
     );
     $stmt->execute([':q' => '%' . $userInput . '%']);
@@ -55,7 +55,7 @@ $trending = $trendingStmt->fetchAll();
                 <?php if (count($searchResults) > 0): ?>
                     <?php foreach ($searchResults as $row): ?>
                         <div class="destination-container">
-                            <a href="<?= htmlspecialchars($row['siteUrl']) ?>"><img class="destination-img" src="<?= htmlspecialchars($row['imgUrl']) ?>" alt=""></a>
+                            <a href="<?= htmlspecialchars($row['site_url']) ?>"><img class="destination-img" src="<?= htmlspecialchars($row['img_url']) ?>" alt=""></a>
                             <div class="destination-info">
                                 <p class="location"><?= htmlspecialchars($row['location']) ?>, <?= htmlspecialchars($row['country']) ?></p>
                                 <p class="activity"><?= htmlspecialchars($row['activity']) ?></p>
@@ -79,7 +79,7 @@ $trending = $trendingStmt->fetchAll();
         <div class="trending-destinations" id="trending-destinations">
             <?php foreach ($trending as $row): ?>
                 <div class="destination-container">
-                    <a href="<?= htmlspecialchars($row['siteUrl']) ?>"><img class="destination-img" src="<?= htmlspecialchars($row['imgUrl']) ?>" alt=""></a>
+                    <a href="<?= htmlspecialchars($row['site_url']) ?>"><img class="destination-img" src="<?= htmlspecialchars($row['img_url']) ?>" alt=""></a>
                     <div class="destination-info">
                         <p class="location"><?= htmlspecialchars($row['location']) ?>, <?= htmlspecialchars($row['country']) ?></p>
                         <p class="activity"><?= htmlspecialchars($row['activity']) ?></p>

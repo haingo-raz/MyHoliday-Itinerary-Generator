@@ -4,12 +4,12 @@ require_once __DIR__ . '/../src/db.php';
 $pdo = getDbConnection();
 
 $totals = $pdo->query(
-    'SELECT COALESCE(SUM(addedPrice), 0) AS totalPrice,
-            COALESCE(SUM(addedDuration), 0) AS totalDuration
-     FROM addedDestination'
+    'SELECT COALESCE(SUM(added_price), 0) AS total_price,
+            COALESCE(SUM(added_duration), 0) AS total_duration
+     FROM added_destination'
 )->fetch();
 
-$added = $pdo->query('SELECT * FROM addedDestination')->fetchAll();
+$added = $pdo->query('SELECT * FROM added_destination ORDER BY id')->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,8 +38,8 @@ $added = $pdo->query('SELECT * FROM addedDestination')->fetchAll();
         <hr>
 
         <div class="planner-info">
-            <p><b>Approximate duration:</b> <span id="total-days"><?= htmlspecialchars((string)$totals['totalDuration']) ?></span> day(s)</p>
-            <p><b>Approximate total price:</b> $<span id="total-price"><?= htmlspecialchars((string)$totals['totalPrice']) ?></span></p>
+            <p><b>Approximate duration:</b> <span id="total-days"><?= htmlspecialchars((string)$totals['total_duration']) ?></span> day(s)</p>
+            <p><b>Approximate total price:</b> $<span id="total-price"><?= htmlspecialchars((string)$totals['total_price']) ?></span></p>
         </div>
 
         <div class="all-added-destinations" id="all-added-destinations">
@@ -50,10 +50,10 @@ $added = $pdo->query('SELECT * FROM addedDestination')->fetchAll();
                     </div>
                     <div>
                         <span class="close">X</span>
-                        <p class="destination-name"><b>Destination: </b><span class="addedLocation"><?= htmlspecialchars($row['addedLocation']) ?></span></p>
-                        <p><b>Duration: </b><span class="addedDuration"><?= htmlspecialchars((string)$row['addedDuration']) ?></span> days</p>
-                        <p><b>Activities: </b><span class="addedActivity"><?= htmlspecialchars($row['addedActivity']) ?></span></p>
-                        <p><b>Price: </b>As from $<span class="addedPrice"><?= htmlspecialchars((string)$row['addedPrice']) ?></span></p>
+                        <p class="destination-name"><b>Destination: </b><span class="addedLocation"><?= htmlspecialchars($row['added_location']) ?></span></p>
+                        <p><b>Duration: </b><span class="addedDuration"><?= htmlspecialchars((string)$row['added_duration']) ?></span> days</p>
+                        <p><b>Activities: </b><span class="addedActivity"><?= htmlspecialchars($row['added_activity']) ?></span></p>
+                        <p><b>Price: </b>As from $<span class="addedPrice"><?= htmlspecialchars((string)$row['added_price']) ?></span></p>
                     </div>
                 </div>
             <?php endforeach; ?>
