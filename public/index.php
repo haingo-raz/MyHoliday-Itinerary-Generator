@@ -96,7 +96,9 @@ $trending = $trendingStmt->fetchAll();
         <div class="container my-5">
             <hr>
             <p class="text-center text-muted">MyHoliday Travel Itinerary</p>
-            <p class="text-center text-muted">Made with &#128153; by HR</p>
+            <p class="text-center text-muted">
+                Created with &#10084;&#65039; by <a href="https://github.com/haingo-raz" target="_blank" rel="noopener noreferrer">haingo-raz</a>
+            </p>
         </div>
     </footer>
 </body>

@@ -61,5 +61,14 @@ $added = $pdo->query('SELECT * FROM added_destination ORDER BY id')->fetchAll();
 
         <button onclick="window.print()" class="btn btn-primary btn-print"><i class="bi bi-printer"></i> Print</button>
     </div>
+
+    <footer>
+        <div class="container my-5">
+            <hr>
+            <p class="text-center text-muted">
+                Created with &#10084;&#65039; by <a href="https://github.com/haingo-raz" target="_blank" rel="noopener noreferrer">haingo-raz</a>
+            </p>
+        </div>
+    </footer>
 </body>
 </html>
