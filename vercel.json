@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "api/*.php": {
+      "runtime": "vercel-php@0.7.3"
+    }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/api/index.php" },
+    { "source": "/planner", "destination": "/api/planner.php" },
+    { "source": "/planner.php", "destination": "/api/planner.php" }
+  ]
+}

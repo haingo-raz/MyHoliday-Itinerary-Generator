@@ -7,7 +7,7 @@ $(document).ready(function () {
         var price = $(this).siblings('.price').html();
 
         $.ajax({
-            url: 'api/addDestination.php',
+            url: '/api/addDestination.php',
             type: 'POST',
             data: {
                 location: location,
@@ -28,7 +28,7 @@ $(document).ready(function () {
         var price = $(this).siblings().find('.addedPrice').html();
 
         $.ajax({
-            url: 'api/deleteDestination.php',
+            url: '/api/deleteDestination.php',
             type: 'POST',
             data: {
                 location: location,

@@ -1,0 +1,8 @@
+RewriteEngine On
+
+RewriteRule ^css/(.*)$ public/css/$1 [L]
+RewriteRule ^js/(.*)$ public/js/$1 [L]
+RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
+RewriteRule ^$ api/index.php [L]
+RewriteRule ^planner(\.php)?$ api/planner.php [L]

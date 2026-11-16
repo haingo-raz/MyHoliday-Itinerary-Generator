@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+    volumes:
+      - ./api:/var/www/html/api
+      - ./public:/var/www/html/public
+      - ./src:/var/www/html/src
+      - ./.htaccess:/var/www/html/.htaccess
